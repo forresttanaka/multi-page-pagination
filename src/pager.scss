@@ -1,0 +1,46 @@
+$pager-height: 24px;
+$pager-arrow-width: 24px;
+
+
+.pager-multi {
+    display: flex;
+    
+    > ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        height: $pager-height;
+        border: 1px solid #c0c0c0;
+
+        > li {
+            display: block;
+            list-style-type: none;
+            border-right: 1px solid #c0c0c0;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &.pager-multi__adjacent {
+                flex: 0 1 auto;
+                width: $pager-arrow-width;
+
+                button {
+                    width: 100%;
+                    height: 100%;
+                    padding: 5px 0;
+                    font-size: 0;
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+
+                    svg {
+                        display: block;
+                        height: 100%;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+}
