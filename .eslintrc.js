@@ -19,6 +19,7 @@ module.exports = {
     ],
     rules: {
         indent: ['error', 4],
+        'max-len': 0,
         'no-multiple-empty-lines': ['error', { max: 2 }],
         'no-unused-vars': ['warn'],
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
