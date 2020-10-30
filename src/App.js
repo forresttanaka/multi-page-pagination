@@ -21,39 +21,31 @@ const ChevronRight = () => (
 
 const Pager = ({ currentPage, total, clickHandler }) => {
     // Create the array of page numbers, with page 0 to represent an ellipsis before the current
-    // page and page -1 to represent an ellipsis after the current page.
+    // page and page -1 to represent an ellipsis after the current page. No real difference between
+    // these two ellipsis values, but distinct so we don't have duplicate React keys.
     let pageNumbers;
     if (total <= 9) {
         // A total page count of nine or fewer has no ellipses.
         pageNumbers = _.range(1, total + 1);
     } else {
-        let prevFiller;
-        let nextFiller;
-
         // With more than nine pages, build a cluster of pages around the current page.
-        const clusterMin = Math.max(1, currentPage - 2);
-        const clusterMax = Math.min(currentPage + 2, total);
+        const clusterMin = Math.min(Math.max(1, currentPage - 2), total - 6);
+        const clusterMax = Math.max(Math.min(currentPage + 2, total), 7);
         const clusterPageNumbers = _.range(clusterMin, clusterMax + 1); // _.range ends at max - 1
 
         // Determine whether we need an ellipsis before the cluster, or continuous page numbers.
-        if (clusterMin >= 4) {
-            // Need ellipsis and a 1
-            prevFiller = [1, 0];
-        } else {
-            prevFiller = clusterMin === 1 ? [] : _.range(1, clusterMin);
-        }
+        const prevFiller = clusterMin >= 4 ? [1, 0] : _.range(1, clusterMin);
 
         // Determine whether we need an ellipsis after the cluster, or continuous page numbers.
-        if (clusterMax <= total - 3) {
-            // Need ellipsis and a 1
-            nextFiller = [-1, total];
-        } else {
-            nextFiller = _.range(clusterMax + 1, total + 1);
-        }
+        const nextFiller = clusterMax <= total - 3 ? [-1, total] : _.range(clusterMax + 1, total + 1);
 
-        // Put together the entire sequence of displayed page numbers.
-        pageNumbers = prevFiller.concat(clusterPageNumbers).concat(nextFiller);
+        // Put together the entire sequence of displayed page numbers:
+        // prevFiller - extendClusterPrev - clusterPageNumbers - extendClusterNext - nextFiller
+        pageNumbers = prevFiller.concat(clusterPageNumbers, nextFiller);
     }
+
+    // Calculate the maximum number of digits in a page number.
+    const pageNumberWidth = 10 + total.toString().length * 10;
 
     const pageNumberClick = (pageNumber) => {
         clickHandler(pageNumber);
@@ -77,10 +69,10 @@ const Pager = ({ currentPage, total, clickHandler }) => {
                 </li>
                 {pageNumbers.map((pageNumber) => {
                     if (pageNumber === 0 || pageNumber === -1) {
-                        return <li key={pageNumber} className="pager-multi__page pager-multi__page--skip">&hellip;</li>;
+                        return <li key={pageNumber} className="pager-multi__page pager-multi__page--skip" style={{ width: pageNumberWidth }}>&hellip;</li>;
                     }
                     return (
-                        <li key={pageNumber} className="pager-multi__page">
+                        <li key={pageNumber} className="pager-multi__page" style={{ width: pageNumberWidth }}>
                             <button type="button" onClick={() => pageNumberClick(pageNumber)} disabled={pageNumber === currentPage}>{pageNumber}</button>
                         </li>
                     );
@@ -107,7 +99,7 @@ Pager.propTypes = {
 
 const App = () => {
     const [page, setPage] = React.useState(1);
-    const total = 30;
+    const total = 130;
 
     const handlePagerClick = (requestedPage) => {
         console.log('click %s', requestedPage);
