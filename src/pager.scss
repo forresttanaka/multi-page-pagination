@@ -24,6 +24,7 @@ $pager-arrow-width: 24px;
 
             &.pager-multi__page {
                 flex: 0 1 auto;
+                text-align: center;
 
                 button {
                     width: 100%;
@@ -33,6 +34,7 @@ $pager-arrow-width: 24px;
                     font-weight: bold;
                     border: none;
                     background-color: transparent;
+                    border-radius: 0;
                     cursor: pointer;
 
                     svg {
@@ -43,6 +45,10 @@ $pager-arrow-width: 24px;
 
                     &:hover {
                         background-color: #e0e0e0;
+                    }
+
+                    &:focus {
+                        border-radius: 0;
                     }
                 }
 
@@ -58,6 +64,10 @@ $pager-arrow-width: 24px;
                 &.pager-multi__page--arrow-disabled {
                     button {
                         fill: #c0c0c0;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
                     }
                 }
 
@@ -71,6 +81,10 @@ $pager-arrow-width: 24px;
                 button {
                     color: #fff;
                     background-color: #4f689e;
+
+                    &:hover {
+                        background-color: #4f689e;
+                    }
                 }
             }
         }
