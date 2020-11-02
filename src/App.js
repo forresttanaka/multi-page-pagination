@@ -6,7 +6,7 @@ import './pager.scss';
 
 const App = () => {
     const [page, setPage] = React.useState(1);
-    const total = 9;
+    const total = 20;
 
     const handlePagerClick = (requestedPage) => {
         setPage(requestedPage);
