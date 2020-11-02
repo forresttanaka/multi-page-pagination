@@ -44,11 +44,6 @@ $pager-arrow-width: 24px;
                     &:hover {
                         background-color: #e0e0e0;
                     }
-
-                    &:disabled {
-                        color: #fff;
-                        background-color: #4f689e;
-                    }
                 }
 
                 &.pager-multi__page--arrow {
@@ -57,17 +52,25 @@ $pager-arrow-width: 24px;
                     button {
                         padding: 5px 0;
                         font-size: 0;
+                    }
+                }
 
-                        &:disabled {
-                            fill: #c0c0c0;
-                            background-color: transparent;
-                        }
+                &.pager-multi__page--arrow-disabled {
+                    button {
+                        fill: #c0c0c0;
                     }
                 }
 
                 &.pager-multi__page--skip {
                     border-top: none;
                     border-bottom: none;
+                }
+            }
+
+            &.pager-multi__page--current {
+                button {
+                    color: #fff;
+                    background-color: #4f689e;
                 }
             }
         }

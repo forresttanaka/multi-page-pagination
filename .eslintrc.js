@@ -23,6 +23,7 @@ module.exports = {
         'no-multiple-empty-lines': ['error', { max: 2 }],
         'no-unused-vars': ['warn'],
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-        'react/jsx-indent': [0, 4],
+        'react/jsx-indent': ['error', 4],
+        'react/jsx-indent-props': ['error', 4],
     },
 };
