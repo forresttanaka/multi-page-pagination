@@ -2,7 +2,7 @@
 
 This React component provides a way for the user to select between multiple pages. The controls include next/previous arrows to go to adjacent pages, always displays the first and last available pages, and shows a cluster of pages around the current page. To keep the width of this component under control, ellipses represent several pages the user can't directly select.
 
-[Nine or fewer pages appear without ellipses](images/nine.png)
+![Nine or fewer pages appear without ellipses](images/nine.png)
 
 # Getting Started with Create React App
 
